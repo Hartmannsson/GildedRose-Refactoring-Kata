@@ -19,11 +19,19 @@ class GildedRose(object):
                 _update_sulfuras(item)
             elif item.name.startswith("Conjured"):
                 _update_conjured(item)
+            elif item.name == "Gem of Teleportation"
+                _update_gem(item)
             else:
                 _update_normal(item)
 
 def clamp_quality(quality):
     return max(MIN_QUALITY, min(MAX_QUALITY, quality))
+
+def _update_gem(item):
+    item.sell_in -= 1
+    degradion = 0 if item.sell_in >= 0 else -3
+    item.quality = clamp_quality(item.quality - degradation)
+    
 
 def _update_normal(item):
     item.sell_in -= 1
